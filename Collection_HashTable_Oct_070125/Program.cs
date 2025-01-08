@@ -92,11 +92,42 @@ namespace Collection_HashTable_Oct_070125
 
     public class HashTableDemo
     {
+        Hashtable states = new Hashtable();
+
+        public string SearchCity(string cty)
+        {
+            var keys = states.Keys;
+
+            foreach (var st in keys)
+            {
+                var cities = (ArrayList)states[st];
+                if (cities.Contains(cty))
+                {
+                    return st.ToString();
+                }
+            }
+            return null;
+        }
+        public void display_HT()
+        {
+            var keys = states.Keys;
+            foreach (var st in keys)
+            {
+                var cities = states[st];
+                ArrayList citiArlist = (ArrayList)cities;
+                Console.WriteLine("state:" + st);
+                foreach (var ct in citiArlist)
+                {
+                    Console.Write(" " + ct);
+                }
+                Console.WriteLine();
+            }
+        }
         public void state_cities()
         {
-            Hashtable states = new Hashtable();
+           
             ArrayList mcities = new ArrayList() {
-               "pune","Mumbai","nashik","nagar"
+               "pune","mumbai","nashik","nagar"
             };
             states.Add("maharashtra", mcities);
 
@@ -110,18 +141,7 @@ namespace Collection_HashTable_Oct_070125
 
             //------------------------------
 
-            var keys = states.Keys;
-            foreach (var st in keys)
-            {
-                var cities = states[st];
-                ArrayList citiArlist = (ArrayList)cities;
-                Console.WriteLine("state:"+st);
-                foreach (var ct in citiArlist)
-                {
-                    Console.Write(" "+ct);
-                }
-                Console.WriteLine();
-            }
+           
         }
         public void HTTry()
         {
@@ -174,11 +194,42 @@ namespace Collection_HashTable_Oct_070125
             //// PO.AddIntoArrayList();
             ///
 
-            HashTableDemo htd = new HashTableDemo();
-            //htd.HTTry();
-            htd.state_cities();
+            // HashTableDemo htd = new HashTableDemo();
+            // //htd.HTTry();
+            // htd.state_cities();
+            // htd.display_HT();
 
 
+            // string ct;
+            // Console.WriteLine("Enter City name to find State");
+            // ct = Console.ReadLine();
+            //string StName= htd.SearchCity(ct);
+
+            // if (string.IsNullOrEmpty(StName))
+            // {
+            //     Console.WriteLine("State not found!!!");
+            // }
+            // else
+            // {
+            //     Console.WriteLine($"{ct} belogns to {StName}");
+            // }
+
+            Student_HashTable sht = new Student_HashTable();
+            sht.Add_Students();
+            sht.showHT();
+            Student tempStud;
+            var result = sht.SearchStud(14,out tempStud);
+            //result ==> null or "FE/SE/TE/BE"
+            Console.WriteLine("-----Student Search Result -------");
+            if (string.IsNullOrEmpty(result))
+            {
+                Console.WriteLine("Student Not found!!!");
+            }
+            else
+            {
+                Console.WriteLine("Dept:"+result);
+                tempStud.showStudent();
+            }
             Console.ReadKey();
         }
     }
